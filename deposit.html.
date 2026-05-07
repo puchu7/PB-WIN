@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PB WIN - Deposit</title>
+    <style>
+        body { background-color: #000b1a; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
+        .box { background: #001a33; padding: 20px; border-radius: 15px; border: 1px solid #ffcc00; }
+        .qr-code { width: 200px; height: 200px; background: white; margin: 20px auto; display: flex; align-items: center; justify-content: center; color: black; font-weight: bold; }
+        input { width: 90%; padding: 12px; margin: 10px 0; border-radius: 8px; border: none; }
+        .btn { background: #28a745; color: white; padding: 15px; width: 100%; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Manual Deposit</h2>
+        <p>Scan QR to Pay or use UPI ID:</p>
+        <p style="color: #ffcc00; font-weight: bold;">pbwin@upi</p>
+        
+        <div class="qr-code">
+            [YOUR QR IMAGE HERE]
+        </div>
+
+        <input type="number" placeholder="Enter Amount (₹)">
+        <input type="text" placeholder="Enter UTR / Transaction ID">
+        <button class="btn" onclick="submit()">Submit Payment</button>
+    </div>
+
+    <script>
+        function submit() {
+            alert("Payment details submitted! Admin will approve in 10-15 mins.");
+            window.location.href = "game.html";
+        }
+    </script>
+</body>
+</html>

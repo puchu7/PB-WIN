@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PB WIN - Win Go</title>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <style>
+        :root { --bg-dark: #09090b; --card-bg: #18181b; --gold: #facc15; --green: #22c55e; --red: #ef4444; --violet: #a855f7; }
+        body { background-color: var(--bg-dark); color: white; font-family: sans-serif; margin: 0; padding-bottom: 80px; overflow-x: hidden; }
+        
+        /* Top Wallet Section */
+        .wallet-card { background: linear-gradient(135deg, #1e293b, #0f172a); padding: 25px 15px; border-radius: 0 0 30px 30px; text-align: center; border-bottom: 2px solid var(--gold); }
+        .balance-amount { font-size: 32px; font-weight: 800; color: var(--gold); margin: 10px 0; }
+        
+        /* Period & Timer Bar */
+        .game-status { display: flex; justify-content: space-between; padding: 15px; background: var(--card-bg); margin: 15px 10px; border-radius: 15px; align-items: center; border: 1px solid #27272a; }
+        .p-label { font-size: 12px; color: #94a3b8; margin-bottom: 4px; }
+        #period { font-size: 16px; font-weight: bold; color: white; letter-spacing: 1px; }
+        #timer { font-size: 28px; color: var(--gold); font-weight: 800; }
+
+        /* Betting Buttons Section */
+        .bet-box { background: var(--card-bg); margin: 10px; padding: 15px; border-radius: 20px; }
+        .color-row { display: flex; gap: 1

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PB WIN - Hacker Panel</title>
+    <style>
+        body { background-color: #09090b; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
+        .admin-card { background: #18181b; padding: 30px; border-radius: 20px; border: 2px solid #facc15; box-shadow: 0 0 20px rgba(250, 204, 21, 0.2); }
+        h1 { color: #facc15; font-size: 24px; }
+        input { padding: 15px; width: 80%; margin: 20px 0; border-radius: 10px; border: 1px solid #3f3f46; background: #27272a; color: white; font-size: 20px; text-align: center; }
+        .btn-hack { background: #facc15; color: black; border: none; padding: 18px; border-radius: 10px; font-weight: bold; font-size: 18px; cursor: pointer; width: 85%; transition: 0.3s; }
+        .btn-hack:active { transform: scale(0.95); }
+        #status { margin-top: 20px; color: #22c55e; font-weight: bold; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <div class="admin-card">
+        <h1>PB WIN HACKER</h1>
+        <p style="color: #94a3b8;">Enter next winning number (0-9)</p>
+        
+        <input type="number" id="numInput" placeholder="0-9" min="0" max="9">
+        
+        <button class="btn-hack" onclick="setNext()">HACK NEXT RESULT</button>
+        
+        <div id="status"></div>
+    </div>
+
+    <script>
+        function setNext() {
+            const val = document.getElementById('numInput').value;
+            const status = document.getElementById('status');
+
+            if(val === "" || val < 0 || val > 9) {
+                alert("Bhai, 0 se 9 ke beech hi dalo!");
+                return;
+            }
+
+            // Server ko command bhejna
+            fetch('http://localhost:3000/admin/set-result', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ number: val })
+            })
+            .then(res => res.json())
+            .then(data => {
+                status.innerText = "✅ Success: Next result set to " + val;
+                document.getElementById('numInput').value = "";
+            })
+            .catch(err => {
+                status.innerText = "❌ Error: Server se connection nahi hua!";
+                status.style.color = "#ef4444";
+            });
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PB WIN - Login</title>
+    <style>
+        body { background-color: #09090b; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .login-card { background: #18181b; padding: 30px; border-radius: 20px; width: 85%; max-width: 400px; text-align: center; border: 1px solid #27272a; }
+        h2 { color: #facc15; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #3f3f46; background: #27272a; color: white; box-sizing: border-box; }
+        .btn { width: 100%; padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .btn-login { background: #facc15; color: black; }
+        .btn-reg { background: transparent; border: 1px solid #facc15; color: #facc15; }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <h2>PB WIN</h2>
+    <input type="text" id="mobile" placeholder="Mobile Number">
+    <input type="password" id="password" placeholder="Password">
+    
+    <button class="btn btn-login" onclick="handleAuth('login')">Login</button>
+    <button class="btn btn-reg" onclick="handleAuth('register')">Register</button>
+    <p id="msg" style="font-size: 12px; margin-top: 15px;"></p>
+</div>
+
+<script>
+    async function handleAuth(type) {
+        const mobile = document.getElementById('mobile').value;
+        const password = document.getElementById('password').value;
+        const msg = document.getElementById('msg');
+
+        if(!mobile || !password) { alert("Details dalo bhai!"); return; }
+
+        const route = type === 'login' ? '/login' : '/register';
+        
+        try {
+            const res = await fetch('http://localhost:3000' + route, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mobile, password })
+            });
+            const data = await res.json();
+
+            if(data.success) {
+                msg.style.color = "#22c55e";
+                msg.innerText = data.message;
+                if(type === 'login') {
+                    localStorage.setItem('userMobile', mobile);
+                    window.location.href = "game.html"; // Login ke baad game page par bhejo
+                }
+            } else {
+                msg.style.color = "#ef4444";
+                msg.innerText = data.message;
+            }
+        } catch(err) {
+            msg.innerText = "Server Error!";
+        }
+    }
+</script>
+
+</body>
+</html>
